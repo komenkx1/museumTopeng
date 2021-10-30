@@ -1,10 +1,3 @@
-/**
-* Template Name: Bootslander - v4.6.0
-* Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -118,23 +111,23 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.5s;
   z-index: 997;
   transition: all 0.5s;
-  background: rgba(1, 4, 136, 0.9);
+     background: rgb(2 2 2 / 90%);
 }
 #header.header-transparent {
   background: transparent;
 }
 #header.header-scrolled {
-  background: rgba(1, 4, 136, 0.9);
+     background: rgb(2 2 2 / 90%);
   height: 60px;
 }
-#header .logo h1 {
-  font-size: 28px;
+#header .logo h6 {
+  /* font-size: 28px; */
   margin: 0;
   padding: 0;
   line-height: 1;
   font-weight: 700;
 }
-#header .logo h1 a, #header .logo h1 a:hover {
+#header .logo h6 a, #header .logo h6 a:hover {
   color: #fff;
   text-decoration: none;
 }
@@ -283,7 +276,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(1, 3, 91, 0.9);
+  background: rgb(91 63 1 / 90%);
   transition: 0.3s;
   z-index: 999;
 }
@@ -311,10 +304,10 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile a, .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #0205a1;
+  color: black;
 }
 .navbar-mobile a:hover, .navbar-mobile .active, .navbar-mobile li:hover > a {
-  color: #3f43fd;
+  color: #fdba3f;
 }
 .navbar-mobile .getstarted, .navbar-mobile .getstarted:focus {
   margin: 15px;
@@ -351,13 +344,13 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  background: url("../img/hero-bg.jpg");
+  background: url("../img/bg-herow-wayang.jpg");
   position: relative;
   padding: 120px 0 0 0;
 }
 #hero:before {
   content: "";
-  background: rgba(2, 5, 161, 0.91);
+  background: rgb(183 113 8 / 91%);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -571,7 +564,7 @@ section {
   font-weight: 700;
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
-  color: #010483;
+  color: black;
 }
 
 /*--------------------------------------------------------------
@@ -636,7 +629,7 @@ section {
 .about .icon-boxes h3 {
   font-size: 28px;
   font-weight: 700;
-  color: #010483;
+  color: black;
   margin-bottom: 15px;
 }
 .about .icon-box {
@@ -683,20 +676,20 @@ section {
   font-size: 14px;
 }
 .about .video-box {
-  background: url("../img/about.png") center center no-repeat;
+  background: url("../img/wayangVector.jpg") center center no-repeat;
   background-size: contain;
   min-height: 300px;
 }
 .about .play-btn {
-  width: 94px;
-  height: 94px;
-  background: radial-gradient(#3f43fd 50%, rgba(63, 67, 253, 0.4) 52%);
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-  left: calc(50% - 47px);
-  top: calc(50% - 47px);
-  overflow: hidden;
+    width: 94px;
+    height: 94px;
+    background: radial-gradient(#1acc8d 50%, rgb(63 253 95 / 40%) 52%);
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    left: calc(50% - 47px);
+    top: calc(50% - 47px);
+    overflow: hidden;
 }
 .about .play-btn::after {
   content: "";
@@ -729,13 +722,13 @@ section {
   animation-timing-function: steps;
   opacity: 1;
   border-radius: 50%;
-  border: 5px solid rgba(63, 67, 253, 0.7);
+  border: 5px solid rgb(253 230 63 / 70%);
   top: -15%;
   left: -15%;
   background: rgba(198, 16, 0, 0);
 }
 .about .play-btn:hover::after {
-  border-left: 15px solid #3f43fd;
+  border-left: 15px solid #fdca3f;
   transform: scale(20);
 }
 .about .play-btn:hover::before {
@@ -800,7 +793,7 @@ section {
   font-size: 16px;
 }
 .features .icon-box h3 a {
-  color: #010483;
+  color: black;
   transition: ease-in-out 0.3s;
 }
 .features .icon-box h3 a:hover {
@@ -830,7 +823,7 @@ section {
   left: 50%;
   transform: translateX(-50%);
   font-size: 20px;
-  background: #1acc8d;
+  background: #ffc107;
   padding: 12px;
   color: #fff;
   border-radius: 50px;
@@ -845,7 +838,7 @@ section {
   font-size: 36px;
   display: block;
   font-weight: 600;
-  color: #010483;
+  color: black;
 }
 .counts .count-box p {
   padding: 0;
@@ -863,7 +856,7 @@ section {
 .details .content h3 {
   font-weight: 600;
   font-size: 26px;
-  color: #010483;
+  color: black;
 }
 .details .content ul {
   list-style: none;
@@ -1226,11 +1219,12 @@ section {
 --------------------------------------------------------------*/
 .contact .info {
   width: 100%;
+  cursor: pointer;
   background: #fff;
 }
 .contact .info i {
   font-size: 20px;
-  color: #3f43fd;
+  color: black;
   float: left;
   width: 44px;
   height: 44px;
@@ -1246,19 +1240,20 @@ section {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #010483;
+  color: black;
 }
 .contact .info p {
   padding: 0 0 0 60px;
   margin-bottom: 0;
   font-size: 14px;
-  color: #0205a1;
+  color: #696969;
 }
 .contact .info .email, .contact .info .phone {
   margin-top: 40px;
 }
 .contact .info .email:hover i, .contact .info .address:hover i, .contact .info .phone:hover i {
-  background: #1acc8d;
+  background: #ffc107;
+  cursor: pointer;
   color: #fff;
 }
 .contact .php-email-form {
@@ -1348,7 +1343,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #010351;
+  background: black;
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
