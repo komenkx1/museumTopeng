@@ -1,0 +1,3 @@
+<button class="btn tbn-sm btn-info" wire:click="select({{ $row->id }})"><i class="bi bi-eye text-white"></i></button>
+<a href="{{ Route('admin.augmented-reality.edit',['augmented_reality'=>$row->id]) }}" class="btn tbn-sm btn-secondary" ><i class="bi bi-pencil text-white"></i></a>
+<button class="btn tbn-sm btn-danger" wire:click="triggerConfirm({{ $row->id }})"><i class="bi bi-trash text-white"></i></button>
