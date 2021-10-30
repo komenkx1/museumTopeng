@@ -3,6 +3,8 @@
 use App\Http\Controllers\admin\AugmentedRealityController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\front\AugmentedRealityController as FrontAugmentedRealityController;
+use App\Http\Controllers\front\auth\AugmentedRealityAccountController;
+use App\Models\AugmentedRealityAccount;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("home");
 
 
 // Route::group(['middleware' => ['auth']], function () {
@@ -29,11 +31,16 @@ Route::group([
     'as' => 'admin.'
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::resource('augmented-reality', AugmentedRealityController::class)->except(["destroy","show"]);
+    Route::resource('augmented-reality', AugmentedRealityController::class)->except(["destroy", "show"]);
 });
 
 //ar
-Route::get('/ar-reader', [FrontAugmentedRealityController::class, 'index'])->name('ArReader');
-
+Route::middleware('auth:augmentedRealities')->group(function () {
+    Route::get('/ar-reader', [FrontAugmentedRealityController::class, 'index'])->name('ArReader');
+});
+//ar-auth
+Route::get('/ar-reader/login', [AugmentedRealityAccountController::class, 'index'])->name('ArReader.login');
+Route::get('/ar-reader/logout', [AugmentedRealityAccountController::class, 'logout'])->name('ArReader.logout');
+Route::post('/ar-reader/login/proses', [AugmentedRealityAccountController::class, 'login'])->name('ArReader.login.proses');
 
 // });

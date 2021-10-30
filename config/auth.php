@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'augmentedRealities' => [
+            'driver' => 'session',
+            'provider' => 'augmented_reality_accounts',
+        ],
     ],
 
     /*
@@ -64,11 +69,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'augmented_reality_accounts' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AugmentedRealityAccount::class,
+        ], 
     ],
 
     /*
