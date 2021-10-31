@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AugmentedRealityController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\front\AugmentedRealityController as FrontAugmentedRealityController;
 use App\Http\Controllers\front\auth\AugmentedRealityAccountController;
 use App\Models\AugmentedRealityAccount;
@@ -32,6 +33,8 @@ Route::group([
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('augmented-reality', AugmentedRealityController::class)->except(["destroy", "show"]);
+    Route::get("packages", [PackageController::class,"index"])->name("packages.index");
+
 });
 
 //ar
@@ -39,8 +42,9 @@ Route::middleware('auth:augmentedRealities')->group(function () {
     Route::get('/ar-reader', [FrontAugmentedRealityController::class, 'index'])->name('ArReader');
 });
 //ar-auth
-Route::get('/ar-reader/login', [AugmentedRealityAccountController::class, 'index'])->name('ArReader.login');
-Route::get('/ar-reader/logout', [AugmentedRealityAccountController::class, 'logout'])->name('ArReader.logout');
+// Route::get('/ar-reader/login', [AugmentedRealityAccountController::class, 'index'])->name('ArReader.login');
+Route::post('/ar-reader/logout', [AugmentedRealityAccountController::class, 'logout'])->name('ArReader.logout');
 Route::post('/ar-reader/login/proses', [AugmentedRealityAccountController::class, 'login'])->name('ArReader.login.proses');
+
 
 // });

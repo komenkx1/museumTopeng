@@ -14,7 +14,11 @@
 
              @if (Route::is("ArReader"))
                 <ul>
-                  <li><a class="nav-link" href="{{ Route("ArReader.logout") }}">Logout</a></li>
+                    <li>
+                        <a class="nav-link" href="#" onclick="event.preventDefault();
+                        document.getElementById('formLogout').submit();">Logout</a>
+                                             
+                                            </li>
                 </ul>
               @else
               <ul>
@@ -28,7 +32,11 @@
                     <ul>
                      @if (Auth::guard('augmentedRealities')->user())
                      <li><a class="nav-link"  href="{{ Route("ArReader") }}">Start Augmented Reality</a></li>
-                     <li><a class="nav-link" href="{{ Route("ArReader.logout") }}">Logout</a></li>
+                     <li>
+    <a class="nav-link" href="#" onclick="event.preventDefault();
+    document.getElementById('formLogout').submit();">Logout</a>
+                         
+                        </li>
                        @else
                         <li><a data-bs-toggle="modal" href=" #modalForm" role="button">Login</a></li>
                         @endif
@@ -42,3 +50,7 @@
 
      </div>
  </header><!-- End Header -->
+
+ <form action="{{ Route("ArReader.logout") }}" method="post" id="formLogout">
+    @csrf
+</form>

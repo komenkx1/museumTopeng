@@ -16,7 +16,14 @@
                 <i class="bi bi-card-image"></i>
                 <span>Aumented Reality Source</span>
             </a>
-        </li><!-- End Dashboard Nav -->
+        </li><!-- End AR Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link @if (Route::is('admin.packages.*')) active @else collapsed @endif" href="{{ Route('admin.packages.index') }}">
+              <i class="bi bi-box"></i>
+              <span>Packages</span>
+          </a>
+      </li><!-- End AR Nav -->
 
       </ul>
 
