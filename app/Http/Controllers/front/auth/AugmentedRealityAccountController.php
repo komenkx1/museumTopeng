@@ -47,7 +47,7 @@ class AugmentedRealityAccountController extends Controller
     public function logout()
     {
         // dd( Session::getId());
-        $oldSession = SessionModel::where('augmented_reality_accounts_id', Auth::guard('augmentedRealities')->user()->id)->first();
+        $oldSession = SessionModel::where('ip_address',  $this->getIp())->first();
         // dd($oldSession);
         SessionModel::destroy($oldSession->id);
         //    dd(  Auth::guard('augmentedRealities')->user()); 
