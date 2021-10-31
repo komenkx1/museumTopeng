@@ -24,17 +24,15 @@
             url="{{ $itemAr->marker_file }}"
             raycaster="objects: .clickable"
             emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-        >
+            cursor="fuse: false; rayOrigin: mouse;">
             <a-image
                 src="{{ $itemAr->content_file }}"
-                scale="1 1 1"
+                scale="2 3 3 2"
                 class="clickable"
                 rotation="-90ma 0 0"
                 gesture-handler
             ></a-image>
-        </a-marker>
-                
+        </a-marker> 
         @endforeach
         
 
