@@ -17,34 +17,29 @@ class AugmentedRealityAccountController extends Controller
     {
         // DB::beginTransaction();
 
-        $userInput = AugmentedRealityAccount::where("username", $request->username)->first();
-
-        if ($userInput) {
-            $oldSession = SessionModel::where('augmented_reality_accounts_id', $userInput->id)->get(); // can multiple spesific 
-            if ($oldSession->count() == 0) {
-                if (Auth::guard('augmentedRealities')->attempt(['username' => $request->username, 'password' => $request->password])) {
+        if (Auth::guard('augmentedRealities')->attempt(['username' => $request->username, 'password' => $request->password])) {
+            if (Auth::guard('augmentedRealities')->check()) {
+                $oldSession = SessionModel::where('augmented_reality_accounts_id', Auth::guard('augmentedRealities')->user()->id)->count(); // can multiple spesific 
+                if ($oldSession > 0) {
+                    Auth::guard('augmentedRealities')->logout();
+                    return redirect("/")->with('info', 'Your Account Is Logged In Another Device! Please Logout To Login On This Device');
+                } else {
                     $newSession = SessionModel::create([
                         "augmented_reality_accounts_id" => Auth::guard('augmentedRealities')->user()->id,
                         "ip_address" => $this->getIp(),
                         "user_agent" => $request->header('User-Agent'),
                         "payload" => Session::getId(),
                     ]);
-
-                    return redirect()->route("ArReader");
-                } else {
-                    return redirect("/")->with('info', 'Wrong Username or Password!');
                 }
-            }else{
-                return redirect("/")->with('info', 'Your Account Is Logged In Another Device! Please Logout To Login On This Device');
-
             }
-            $request->session()->regenerate();
+
+            return redirect()->route("ArReader");
         } else {
             return redirect("/")->with('info', 'Wrong Username or Password!');
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         // dd( Session::getId());
         $oldSession = SessionModel::where('ip_address',  $this->getIp())->first();
@@ -52,6 +47,8 @@ class AugmentedRealityAccountController extends Controller
         SessionModel::destroy($oldSession->id);
         //    dd(  Auth::guard('augmentedRealities')->user()); 
         Auth::guard('augmentedRealities')->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
         return redirect("/");
     }
 
