@@ -26,6 +26,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/transaction/{package:id}', [HomeController::class, 'transaction'])->name('home.transaction');
 Route::post('/transaction/filter/province', [HomeController::class, 'getProvince'])->name('home.transaction.filter.province');
 Route::post('/transaction/checkout', [HomeController::class, 'checkout'])->name('home.transaction.checkout');
+Route::post('/transaction/checkout/notify', [HomeController::class, 'notify'])->name('home.transaction.checkout.notify');
+
 
 
 // Route::group(['middleware' => ['auth']], function () {
