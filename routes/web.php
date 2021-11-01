@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\front\AugmentedRealityController as FrontAugmentedRealityController;
 use App\Http\Controllers\front\auth\AugmentedRealityAccountController;
+use App\Http\Controllers\HomeController;
 use App\Models\AugmentedRealityAccount;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('front.index');
-})->name("home");
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Route::group(['middleware' => ['auth']], function () {

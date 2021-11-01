@@ -72,8 +72,8 @@
             </div>
         </section><!-- End About Section -->
 
-         <!-- ======= Counts Section ======= -->
-         <section id="counts" class="counts">
+        <!-- ======= Counts Section ======= -->
+        <section id="counts" class="counts">
             <div class="container">
 
                 <div class="row" data-aos="fade-up">
@@ -123,9 +123,11 @@
                         </div>
 
                     </a>
-                    <a rel="chimps" href="/assets/img/Sustainability_Through_Differences 2018.jpg" class="fancybox col-lg-3 col-6 my-2 my-2">
+                    <a rel="chimps" href="/assets/img/Sustainability_Through_Differences 2018.jpg"
+                        class="fancybox col-lg-3 col-6 my-2 my-2">
                         <div class="card shadow-sm rounded col-12">
-                            <img src="/assets/img/Sustainability_Through_Differences 2018.jpg" class="imgEvent" alt="">
+                            <img src="/assets/img/Sustainability_Through_Differences 2018.jpg" class="imgEvent"
+                                alt="">
                         </div>
 
                     </a>
@@ -141,7 +143,7 @@
             </div>
         </section><!-- End event Section -->
 
-       
+
 
         <!-- ======= Gallery Section ======= -->
         {{-- <section id="gallery" class="gallery">
@@ -406,74 +408,32 @@
 
                 <div class="row" data-aos="fade-left">
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="box" data-aos="zoom-in" data-aos-delay="100">
-                            <h3>Free</h3>
-                            <h4><sup>$</sup>0<span> / month</span></h4>
-                            <ul>
-                                <li>Aida dere</li>
-                                <li>Nec feugiat nisl</li>
-                                <li>Nulla at volutpat dola</li>
-                                <li class="na">Pharetra massa</li>
-                                <li class="na">Massa ultricies mi</li>
-                            </ul>
-                            <div class="btn-wrap">
-                                <a rel="chimps" href="/assets/img/Flyer2018.jpg" class="fancybox btn-buy">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
+                    @foreach ($packages as $package)
 
-                    <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-                        <div class="box featured" data-aos="zoom-in" data-aos-delay="200">
-                            <h3>Business</h3>
-                            <h4><sup>$</sup>19<span> / month</span></h4>
-                            <ul>
-                                <li>Aida dere</li>
-                                <li>Nec feugiat nisl</li>
-                                <li>Nulla at volutpat dola</li>
-                                <li>Pharetra massa</li>
-                                <li class="na">Massa ultricies mi</li>
-                            </ul>
-                            <div class="btn-wrap">
-                                <a href="#" class="btn-buy">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="col-lg-4 col-md-6 my-2 mx-auto">
+                            <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                                <h3>{{ $package->name }}</h3>
+                                <div class="detail" style="overflow: hidden; height:200px">
+                                    <h4><sup></sup> @currency($package->price)</h4>
+                                    <ul class="m-0">
+                                        @foreach ($package->feautures as $feautures)
+                                            <li>{{ $feautures->name }}</li>
+                                        @endforeach
+                                    </ul>
 
-                    <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-                        <div class="box" data-aos="zoom-in" data-aos-delay="300">
-                            <h3>Developer</h3>
-                            <h4><sup>$</sup>29<span> / month</span></h4>
-                            <ul>
-                                <li>Aida dere</li>
-                                <li>Nec feugiat nisl</li>
-                                <li>Nulla at volutpat dola</li>
-                                <li>Pharetra massa</li>
-                                <li>Massa ultricies mi</li>
-                            </ul>
-                            <div class="btn-wrap">
-                                <a href="#" class="btn-buy">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-                        <div class="box" data-aos="zoom-in" data-aos-delay="400">
-                            <span class="advanced">Advanced</span>
-                            <h3>Ultimate</h3>
-                            <h4><sup>$</sup>49<span> / month</span></h4>
-                            <ul>
-                                <li>Aida dere</li>
-                                <li>Nec feugiat nisl</li>
-                                <li>Nulla at volutpat dola</li>
-                                <li>Pharetra massa</li>
-                                <li>Massa ultricies mi</li>
-                            </ul>
-                            <div class="btn-wrap">
-                                <a href="#" class="btn-buy">Buy Now</a>
+                                    {{-- <a class="read-more @if ($package->feautures->count() <= 4) d-none @endif" href="javascript:void(0)"> See All</a> --}}
+                                </div>
+                                <div class="m-0 p-0" style="height:10px">
+                                    <a class="read-more @if ($package->feautures->count() <= 4) d-none @endif" href="javascript:void(0)">Show more</a>
+                                    <a class="read-less d-none" href="javascript:void(0)">Read Less</a>
+                                </div>
+                                <div class="btn-wrap">
+                                    <a rel="chimps" href="/assets/img/Flyer2018.jpg" class="fancybox btn-buy">Buy Now</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
                 </div>
 
@@ -492,8 +452,8 @@
                 <div class="faq-list">
                     <ul>
                         <li data-aos="fade-up">
-                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
-                                class="collapse" data-bs-target="#faq-list-1">Non consectetur a erat nam at lectus
+                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
+                                data-bs-target="#faq-list-1">Non consectetur a erat nam at lectus
                                 urna duis? <i class="bx bx-chevron-down icon-show"></i><i
                                     class="bx bx-chevron-up icon-close"></i></a>
                             <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
@@ -553,8 +513,7 @@
                             <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
                                 data-bs-target="#faq-list-5" class="collapsed">Tortor vitae purus faucibus ornare.
                                 Varius vel pharetra vel turpis nunc eget lorem dolor? <i
-                                    class="bx bx-chevron-down icon-show"></i><i
-                                    class="bx bx-chevron-up icon-close"></i></a>
+                                    class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                             <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
                                 <p>
                                     Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo
@@ -607,32 +566,7 @@
 
                     <div class="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="200">
 
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                        required>
-                                </div>
-                                <div class="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Your Email" required>
-                                </div>
-                            </div>
-                            <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                                    required>
-                            </div>
-                            <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="5" placeholder="Message"
-                                    required></textarea>
-                            </div>
-                            <div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                            </div>
-                            <div class="text-center"><button type="submit">Send Message</button></div>
-                        </form>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.6401994158746!2d115.27762501478314!3d-8.53426729386502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23d8620e3b60d%3A0xc82bdc98533e47f!2sRumah%20Topeng%20dan%20Wayang%20Setia%20Darma!5e0!3m2!1sid!2sid!4v1635757236763!5m2!1sid!2sid" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
                     </div>
 
@@ -645,9 +579,38 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
-      $(".fancybox").fancybox();
-    });
-  </script>  
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".fancybox").fancybox();
+            $(".read-more").on("click", function() {
+                var detail = $(this).parent().prev(".detail");
+                var currentHeight = detail.css("height");
+                $(this).next(".read-less").removeClass("d-none");
+                $(this).addClass("d-none");
+                detail.css("height", "auto");
+                var animateHeight = detail.css("height");
+                detail.css("height", currentHeight);
+
+                detail.animate().animate({
+                    height: animateHeight
+                }, 200).addClass("expand");
+            });
+
+            $(".read-less").on("click", function() {
+                var detail = $(this).parent().prev(".detail");
+                var currentHeight = detail.css("height"); //store current heght
+                $(this).prev(".read-more").removeClass("d-none");
+                $(this).addClass("d-none");
+                detail.css("height", "auto"); //set height to auto
+                var animateHeight = detail.css("height"); //store auto height
+                detail.css("height", currentHeight);
+                detail.animate({
+                    height: "200"
+                }, 200).removeClass("expand");
+
+
+            });
+
+        });
+    </script>
 @endsection

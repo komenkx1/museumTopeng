@@ -25,6 +25,7 @@
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                 <li><a class="nav-link scrollto" href="#about">About</a></li>
                 <li><a class="nav-link scrollto" href="#event">Event</a></li>
+                <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
                 {{-- <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
          <li><a class="nav-link scrollto" href="#team">Team</a></li> --}}
                 
