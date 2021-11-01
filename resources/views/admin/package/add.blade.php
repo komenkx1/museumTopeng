@@ -9,7 +9,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ Route('admin.index') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ Route('admin.augmented-reality.index') }}">Packages</a></li>
+                    <li class="breadcrumb-item"><a href="{{ Route('admin.packages.index') }}">Packages</a></li>
                     <li class="breadcrumb-item active">Add Form</li>
                 </ol>
             </nav>

@@ -2,9 +2,9 @@
  <header id="header" class="header fixed-top d-flex align-items-center">
 
      <div class="d-flex align-items-center justify-content-between">
-         <a href="/" class="logo d-flex align-items-center">
+         <a href="/" class="logo d-flex align-items-center justify-content-center">
              <img src="/assets/img/icon.png" alt="">
-             <span class="d-none d-lg-block">Museum Mask & Puppets</span>
+             <span class="d-none d-lg-block">Museum Setia Darma House</span>
          </a>
          <i class="bi bi-list toggle-sidebar-btn"></i>
      </div><!-- End Logo -->
