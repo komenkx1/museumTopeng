@@ -6,6 +6,7 @@ use App\Models\Guest;
 use App\Models\Package;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Khsing\World\Models\City;
 use Khsing\World\Models\CityLocale;
 use Khsing\World\Models\Country;
@@ -48,10 +49,14 @@ class HomeController extends Controller
         ]);
         $personData = $request->all();
         $personData["country"] = $country->name;
+        DB::beginTransaction();
+
         $currentGuest = Guest::create($personData);
         $currentPackage = Package::where("id", $request->package_id)->first();
+        DB::commit();
 
         if ($request->paymentMehod == "transfer") {
+        DB::beginTransaction();
 
             $array = array(
                 'key' => 'SANDBOX64492A10-B70E-457F-A3CE-C72D56D84AB0-20211101225225',
@@ -101,7 +106,21 @@ class HomeController extends Controller
                 "status" => 'pending',
                 "payment_method" => "TRANSFER",
             ]);
+        DB::commit();
             return redirect($response['url']);
+        }else {
+            DB::beginTransaction();
+            Transaction::create([
+                "id_guest" => $currentGuest->id,
+                "id_package" => $currentPackage->id,
+                "session_ID" => "-",
+                "url" => "-",
+                "status" => 'pending',
+                "payment_method" => "COD",
+            ]);
+            DB::commit();
+
+            return redirect()->route("home")->with("success","Transaksi Nerhasil Dilakukan. Mohon Cek Email Anda");
         }
     }
 

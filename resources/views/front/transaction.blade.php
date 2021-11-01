@@ -140,14 +140,14 @@
                                         <div class="col-lg-12 col-md-6 my-2 mx-auto">
                                             <div class="card p-3">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="paymentMehod"
+                                                    <input class="form-check-input" required type="radio" name="paymentMehod"
                                                         id="flexRadioDefault1" value="transfer">
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Transfer (Bank Transfer, E-Money, Etc.)
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="paymentMehod"
+                                                    <input class="form-check-input" required type="radio" name="paymentMehod"
                                                         id="flexRadioDefault2" value="cod">
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         COD
