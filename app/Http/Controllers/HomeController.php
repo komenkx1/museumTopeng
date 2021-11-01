@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guest;
 use App\Models\Package;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Khsing\World\Models\City;
 use Khsing\World\Models\CityLocale;
@@ -51,23 +52,28 @@ class HomeController extends Controller
         $currentPackage = Package::where("id", $request->package_id)->first();
 
         if ($request->paymentMehod == "transfer") {
-            $array = array(
-                'key' => "E879A0A5-A66D-4ED0-BCA3-1D88221A19C5",
-                'product' => $currentPackage->name,
-                'qty' => '1',
-                'price' => $currentPackage->price,
-                'returnUrl' => 'https://ipaymu.com/return',
-                'notifyUrl' => 'https://ipaymu.com/notify',
-                'cancelUrl' => 'https://ipaymu.com/cancel',
-                'buyerName' => $currentGuest->name,
-                'buyerEmail' => $currentGuest->email,
-                'buyerPhone' => $currentGuest->phone);
             
-            $data = http_build_query($array);
-            $curl = curl_init();
+            $array = array(
+            'key' => 'SANDBOX64492A10-B70E-457F-A3CE-C72D56D84AB0-20211101225225',
+            'action' => 'payment',
+            'product' => $currentPackage->name,
+            'price' => $currentPackage->price,
+            'quantity' => '1',
+            'buyer_name' => $currentGuest->name,
+            'buyer_email' => $currentGuest->email,
+            'buyer_phone' => $currentGuest->phone,
+            'comments' => 'Keterangan Produk',
+            'ureturn' => 'http://websiteanda.com/return.php?q=return',
+            'unotify' => 'http://websiteanda.com/notify.php',
+            'ucancel' => 'http://websiteanda.com/cancel.php',
+            'format' => 'json');
 
+            $data =http_build_query($array);
+
+            $curl = curl_init();
+            
             curl_setopt_array($curl, array(
-              CURLOPT_URL => 'https://sandbox.ipaymu.com/api/v2/payment',
+              CURLOPT_URL => 'https://sandbox.ipaymu.com/payment.htm',
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_ENCODING => '',
               CURLOPT_MAXREDIRS => 10,
@@ -77,17 +83,22 @@ class HomeController extends Controller
               CURLOPT_CUSTOMREQUEST => 'POST',
               CURLOPT_POSTFIELDS => $data,
               CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json',
-                'signature: [object Object]',
-                'va: 1179000899',
-                'timestamp: 20191209155701'
+                'Content-Type: application/x-www-form-urlencoded'
               ),
             ));
             
-            $response = curl_exec($curl);
+            $response = json_encode(curl_exec($curl),1);
             
             curl_close($curl);
-            echo $response;
+            // echo $response;
+
+            Transaction::create([
+                "sessionID" => $response['sessionID'],
+                "url" => $response['url'],
+                "status" => 'pending',
+                "payment_method" => "TRANSFER",
+            ]);
+            return redirect($response['url']);
         }
 
 
