@@ -47,7 +47,7 @@
                         <div class="row mb-3">
                             <label for="inputText" class="col-12 col-form-label">Feauture <span
                                     class="text-danger">*</span></label>
-                            <div class="col-10">
+                            <div class="col-11">
                                 <input type="text" class=" @error('feauture_name.') is-invalid @enderror form-control"
                                     placeholder="Input Package Feauture" wire:model="feauture_name.{{ $value }}">
                                 @error('feauture_name.')
@@ -55,9 +55,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-2 text-center">
-                                <button class="btn btn-success" wire:click.prevent="add({{ $key }})"><i
-                                        class="bi bi-plus"></i></button>
+                            <div class="col-1 text-center">
                                 <button class="btn btn-danger" wire:click.prevent="remove({{ $key }})"><i
                                         class="bi bi-trash"></i></button>
                             </div>

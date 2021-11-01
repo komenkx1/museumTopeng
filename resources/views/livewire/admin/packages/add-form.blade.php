@@ -52,7 +52,6 @@
         </div>
 
         <div class="col-1 text-center">
-            <button class="btn btn-success" wire:click.prevent="add({{$key}})"><i class="bi bi-plus"></i></button>
             <button class="btn btn-danger" wire:click.prevent="remove({{$key}})"><i class="bi bi-trash"></i></button>
         </div>
     </div>
