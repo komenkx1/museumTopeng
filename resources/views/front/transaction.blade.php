@@ -79,6 +79,8 @@
                                 <span class="invalid-feedback"><small>{{ $message }}</small></span>
                             @enderror
                             </div>
+                            <input type="hidden" name="package_id" value="{{ $package->id }}">
+
                         </div>
                         <div class="d-lg-none my-3">
                             <hr>
@@ -138,15 +140,15 @@
                                         <div class="col-lg-12 col-md-6 my-2 mx-auto">
                                             <div class="card p-3">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault1">
+                                                    <input class="form-check-input" type="radio" name="paymentMehod"
+                                                        id="flexRadioDefault1" value="transfer">
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Transfer (Bank Transfer, E-Money, Etc.)
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                        id="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" name="paymentMehod"
+                                                        id="flexRadioDefault2" value="cod">
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         COD
                                                     </label>
