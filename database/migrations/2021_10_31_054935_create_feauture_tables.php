@@ -15,7 +15,7 @@ class CreateFeautureTables extends Migration
     {
         Schema::create('feautures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("id_pakcage")->constrained("packages","id");
+            $table->foreignId("id_package")->constrained("packages","id");
             $table->string("name");
             $table->timestamps();
         });

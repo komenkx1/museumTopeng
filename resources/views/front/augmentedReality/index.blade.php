@@ -27,7 +27,7 @@
             cursor="fuse: false; rayOrigin: mouse;">
             <a-image
                 src="{{ $itemAr->content_file }}"
-                scale="2 3 3 2"
+                scale="3 3 3 3"
                 class="clickable"
                 rotation="-90ma 0 0"
                 gesture-handler

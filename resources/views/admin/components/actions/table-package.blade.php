@@ -1,0 +1,2 @@
+<a href="{{ Route('admin.packages.edit',['package'=>$row->id]) }}" class="btn tbn-sm btn-secondary" ><i class="bi bi-pencil text-white"></i></a>
+<button class="btn tbn-sm btn-danger" wire:click="triggerConfirm({{ $row->id }})"><i class="bi bi-trash text-white"></i></button>

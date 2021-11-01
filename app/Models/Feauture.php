@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Package extends Model
+class Feauture extends Model
 {
     use HasFactory;
+    protected $table = "feautures";
     protected $guarded =["id"];
 
-    public function feautures()
+    public function package()
     {
-        return $this->hasMany(Feauture::class,"id_package");
+        return $this->belongsTo(Package::class);
     }
 }

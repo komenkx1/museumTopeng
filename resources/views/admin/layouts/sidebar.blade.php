@@ -3,6 +3,7 @@
 
       <ul class="sidebar-nav" id="sidebar-nav">
 
+        <li class="nav-heading">Master Data</li>
 
           <li class="nav-item">
             <a class="nav-link  @if (Route::is('admin.index')) active @else collapsed @endif" href="{{ Route('admin.index') }}">
@@ -24,6 +25,7 @@
               <span>Packages</span>
           </a>
       </li><!-- End AR Nav -->
+      <li class="nav-heading">Transaction Data</li>
 
       </ul>
 
