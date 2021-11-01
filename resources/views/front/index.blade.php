@@ -429,7 +429,7 @@
                                     <a class="read-less d-none" href="javascript:void(0)">Read Less</a>
                                 </div>
                                 <div class="btn-wrap">
-                                    <a rel="chimps" href="/assets/img/Flyer2018.jpg" class="fancybox btn-buy">Buy Now</a>
+                                    <a rel="chimps" href="{{ Route("home.transaction",["package"=>$package->id]) }}" class=" btn-buy">Buy Now</a>
                                 </div>
                             </div>
                         </div>
