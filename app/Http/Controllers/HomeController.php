@@ -16,6 +16,8 @@ use Khsing\World\World;
 
 class HomeController extends Controller
 {
+    public $currentTransaction;
+    public $currentTransaction;
     public function index()
     {
         $packages = Package::all();
@@ -60,10 +62,8 @@ class HomeController extends Controller
      
 
         $currentTransaction = $this->newTransaction($currentGuest,$currentPackage);
-        $currentTransactionInfo = $this->getTransaction($currentTransaction->session_ID);
-        dd($currentTransactionInfo);
+        $this->currentTransaction = $currentTransaction;
 
-        Mail::to($currentGuest->email)->send(new NotifikasiNomorPembayaran($currentTransaction));
             return redirect($currentTransaction->url);
         }else {
             DB::beginTransaction();
@@ -93,7 +93,7 @@ class HomeController extends Controller
             'buyer_email' => $currentGuest->email,
             'buyer_phone' => $currentGuest->phone,
             'comments' => 'Keterangan Produk',
-            'ureturn' => 'https://museum-topeng.menkz.xyz/',
+            'ureturn' => route("home.transaction.checkout.ureturn"),
             'unotify' => route("home.transaction.checkout.notify"),
             'ucancel' => 'https://museum-topeng.menkz.xyz/',
             'format' => 'json'
@@ -168,6 +168,15 @@ class HomeController extends Controller
         return $response;
     }
     
+    public function ureturn(Request $request)
+    {
+        
+        Mail::to($this->currentTransaction->guest->email)->send(new NotifikasiNomorPembayaran($this->currentTransaction));
+        $data = $request->all();
+        $transactionInfos = $this->getTransaction($this->currentTransaction->session_ID);
+        dd($transactionInfos);
+
+    }
     public function notify(Request $request)
     {
         $trx_id = $request->trx_id;
