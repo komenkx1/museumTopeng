@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NotifikasiNomorPembayaran;
+use App\Mail\NotifikasiPembayaranSukses;
+use App\Mail\NotifikasiPembayaranSuksesAR;
+use App\Models\AugmentedRealityAccount;
+use App\Models\Feauture;
 use App\Models\Guest;
 use App\Models\Package;
 use App\Models\Transaction;
@@ -16,7 +20,7 @@ use Khsing\World\World;
 
 class HomeController extends Controller
 {
-    public $currentTransaction;
+    
     public function index()
     {
         $packages = Package::all();
@@ -58,10 +62,8 @@ class HomeController extends Controller
         $currentPackage = Package::where("id", $request->package_id)->first();
         DB::commit();
         if ($request->paymentMehod == "transfer") {
-     
 
         $currentTransaction = $this->newTransaction($currentGuest,$currentPackage);
-        $this->currentTransaction = $currentTransaction;
 
             return redirect($currentTransaction->url);
         }else {
@@ -75,7 +77,7 @@ class HomeController extends Controller
             ]);
             DB::commit();
 
-            return redirect()->route("home")->with("success","Transaksi Nerhasil Dilakukan. Mohon Cek Email Anda");
+            return redirect()->route("home")->with("success","Transaksi Berhasil Dilakukan. Mohon Cek Email Anda");
         }
     }
 
@@ -134,12 +136,12 @@ class HomeController extends Controller
         return $currentTransaction;
     }
 
-    public function getTransaction($sessionId)
+    public function getTransaction($id)
     {
 
         $array =  array(
             'key' => 'SANDBOX64492A10-B70E-457F-A3CE-C72D56D84AB0-20211101225225',
-            'sid' => $sessionId,
+            'id' => $id,
             'format' => 'json');
         
         $data = http_build_query($array);
@@ -160,7 +162,7 @@ class HomeController extends Controller
           ),
         ));
         
-        $response = curl_exec($curl);
+         $response = json_decode(curl_exec($curl), 1);
         
         curl_close($curl);
 
@@ -169,11 +171,10 @@ class HomeController extends Controller
     
     public function ureturn(Request $request)
     {
-        
-        Mail::to($this->currentTransaction->guest->email)->send(new NotifikasiNomorPembayaran($this->currentTransaction));
         $data = $request->all();
-        $transactionInfos = $this->getTransaction($this->currentTransaction->session_ID);
-        dd($transactionInfos);
+        $transactionInfos = $this->getTransaction($data["trx_id"]);
+        $mailTransaction = Transaction::where("session_ID",$transactionInfos["SessionId"] )->first();
+        return redirect()->route("home")->with("success","Transaksi Berhasil Dilakukan. Mohon Cek Email Anda");
 
     }
     public function notify(Request $request)
@@ -182,7 +183,11 @@ class HomeController extends Controller
         $sid = $request->sid;
         $status = $request->status;
         // dd($sid);
+        
         $cek = Transaction::where("session_ID", $sid)->first();
+
+        $password = substr(md5(uniqid($cek->guest->id)), 0, 8);
+        $isAR = Feauture::where("id_package", $cek->package->id)->where('name', 'LIKE', "%augmented reality%")->count();
 
         if ($status == "berhasil") {
             $cek->paid_at = now();
@@ -192,6 +197,22 @@ class HomeController extends Controller
             $cek->status = $request->status;
         }
         $cek->update();
+
+        if ($cek->status == "berhasil") {
+            if ($isAR > 0 ) {
+                $lastUserAr = AugmentedRealityAccount::create([
+                    "username" => $cek->guest->id.time(),
+                    "password" => bcrypt($password)
+                ]);
+                Mail::to($cek->guest->email)->send(new NotifikasiPembayaranSuksesAR($cek,$lastUserAr,$password));
+            }else {
+                Mail::to($cek->guest->email)->send(new NotifikasiPembayaranSukses($cek));
+            }
+        }
         return response()->json(['status' => 'ok']);
+        
+     
+
+
     }
 }

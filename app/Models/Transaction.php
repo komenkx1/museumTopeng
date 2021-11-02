@@ -12,6 +12,11 @@ class Transaction extends Model
 
     public function guest()
     {
-    	return $this->belongsTo(Guest::class);
+    	return $this->belongsTo(Guest::class,"id_guest");
+    }
+
+    public function package()
+    {
+    	return $this->belongsTo(Package::class,"id_package");
     }
 }

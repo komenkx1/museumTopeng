@@ -14,4 +14,9 @@ class Package extends Model
     {
         return $this->hasMany(Feauture::class,"id_package");
     }
+
+    public function transaction()
+    {
+        return $this->hasOne(Feauture::class);
+    }
 }

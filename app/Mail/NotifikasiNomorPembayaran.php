@@ -16,9 +16,10 @@ class NotifikasiNomorPembayaran extends Mailable
      *
      * @return void
      */
-    public function __construct($currentTransaction)
+    public function __construct($currentTransaction,$transactionInfos)
     {
         $this->currentTransaction = $currentTransaction;
+        $this->transactionInfos = $transactionInfos;
     }
 
     /**
@@ -28,8 +29,9 @@ class NotifikasiNomorPembayaran extends Mailable
      */
     public function build()
     {
+        // dd($this->transactionInfos); 
         return $this->markdown('notifikasiNomorPembayaran')
                     ->subject("Transaksi #".$this->currentTransaction->session_ID)
-                    ->with("transaction", $this->currentTransaction);
+                    ->with(["transaction" => $this->currentTransaction, "transactionInfos"=>$this->transactionInfos]);
     }
 }
