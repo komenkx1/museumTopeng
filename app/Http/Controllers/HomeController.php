@@ -44,6 +44,7 @@ class HomeController extends Controller
 
     public function checkout(Request $request)
     {
+        // dd($request->paymentMehod);
         $country = Country::getByCode($request->country);
         $request->validate([
             "name" => "required",
@@ -68,13 +69,14 @@ class HomeController extends Controller
             return redirect($currentTransaction->url);
         }else {
             DB::beginTransaction();
-            Transaction::create([
+            $transaction = Transaction::create([
                 "id_guest" => $currentGuest->id,
                 "id_package" => $currentPackage->id,
-                "trx_id" =>  "COD".$currentGuest->id.substr(md5(uniqid(rand(1,6))), 0, 8),
+                "trx_id" =>  strtolower("COD".$currentGuest->id.substr(md5(uniqid(rand(1,6))), 0, 8)),
                 "status" => 'pending',
                 "payment_method" => "COD",
             ]);
+            Mail::to($transaction->guest->email)->send(new NotifikasiNomorPembayaran($transaction));
             DB::commit();
 
             return redirect()->route("home")->with("success","Transaksi Berhasil Dilakukan. Mohon Cek Email Anda");
