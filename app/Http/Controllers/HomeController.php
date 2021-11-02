@@ -115,6 +115,7 @@ class HomeController extends Controller
                 "id_package" => $currentPackage->id,
                 "session_ID" => "-",
                 "url" => "-",
+                "trx_id" =>  "COD".$currentGuest->id.substr(md5(uniqid(rand(time()))), 0, 8),
                 "status" => 'pending',
                 "payment_method" => "COD",
             ]);
