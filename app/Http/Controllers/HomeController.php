@@ -17,7 +17,6 @@ use Khsing\World\World;
 class HomeController extends Controller
 {
     public $currentTransaction;
-    public $currentTransaction;
     public function index()
     {
         $packages = Package::all();
