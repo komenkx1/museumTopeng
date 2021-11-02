@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifikasiNomorPembayaran;
 use App\Models\Guest;
 use App\Models\Package;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Khsing\World\Models\City;
 use Khsing\World\Models\CityLocale;
 use Khsing\World\Models\Country;
@@ -54,60 +56,15 @@ class HomeController extends Controller
         $currentGuest = Guest::create($personData);
         $currentPackage = Package::where("id", $request->package_id)->first();
         DB::commit();
-
         if ($request->paymentMehod == "transfer") {
-        DB::beginTransaction();
+     
 
-            $array = array(
-                'key' => 'SANDBOX64492A10-B70E-457F-A3CE-C72D56D84AB0-20211101225225',
-                'action' => 'payment',
-                'product' => $currentPackage->name,
-                'price' => $currentPackage->price,
-                'quantity' => '1',
-                'buyer_name' => $currentGuest->name,
-                'buyer_email' => $currentGuest->email,
-                'buyer_phone' => $currentGuest->phone,
-                'comments' => 'Keterangan Produk',
-                'ureturn' => 'https://museum-topeng.menkz.xyz/',
-                'unotify' => route("home.transaction.checkout.notify"),
-                'ucancel' => 'https://museum-topeng.menkz.xyz/',
-                'format' => 'json'
-            );
+        $currentTransaction = $this->newTransaction($currentGuest,$currentPackage);
+        $currentTransactionInfo = $this->getTransaction($currentTransaction->session_ID);
+        dd($currentTransactionInfo);
 
-            $data = http_build_query($array);
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://sandbox.ipaymu.com/payment.htm',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => $data,
-                CURLOPT_HTTPHEADER => array(
-                    'Content-Type: application/x-www-form-urlencoded'
-                ),
-            ));
-
-            $response = json_decode(curl_exec($curl), 1);
-            // dd($response);
-            curl_close($curl);
-            // echo $response;
-
-            Transaction::create([
-                "id_guest" => $currentGuest->id,
-                "id_package" => $currentPackage->id,
-                "session_ID" => $response['sessionID'],
-                "url" => $response['url'],
-                "status" => 'pending',
-                "payment_method" => "TRANSFER",
-            ]);
-        DB::commit();
-            return redirect($response['url']);
+        Mail::to($currentGuest->email)->send(new NotifikasiNomorPembayaran($currentTransaction));
+            return redirect($currentTransaction->url);
         }else {
             DB::beginTransaction();
             Transaction::create([
@@ -123,6 +80,94 @@ class HomeController extends Controller
         }
     }
 
+    public function newTransaction($currentGuest,$currentPackage)
+    {
+        DB::beginTransaction();
+        $array = array(
+            'key' => 'SANDBOX64492A10-B70E-457F-A3CE-C72D56D84AB0-20211101225225',
+            'action' => 'payment',
+            'product' => $currentPackage->name,
+            'price' => $currentPackage->price,
+            'quantity' => '1',
+            'buyer_name' => $currentGuest->name,
+            'buyer_email' => $currentGuest->email,
+            'buyer_phone' => $currentGuest->phone,
+            'comments' => 'Keterangan Produk',
+            'ureturn' => 'https://museum-topeng.menkz.xyz/',
+            'unotify' => route("home.transaction.checkout.notify"),
+            'ucancel' => 'https://museum-topeng.menkz.xyz/',
+            'format' => 'json'
+        );
+
+        $data = http_build_query($array);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://sandbox.ipaymu.com/payment.htm',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/x-www-form-urlencoded'
+            ),
+        ));
+        $response = json_decode(curl_exec($curl), 1);
+        // dd($response);
+        curl_close($curl);
+        // echo $response;
+
+        $currentTransaction = Transaction::create([
+            "id_guest" => $currentGuest->id,
+            "id_package" => $currentPackage->id,
+            "session_ID" => $response['sessionID'],
+            "url" => $response['url'],
+            "status" => 'pending',
+            "payment_method" => "TRANSFER",
+        ]);
+        DB::commit();
+
+        return $currentTransaction;
+    }
+
+    public function getTransaction($sessionId)
+    {
+
+        $array =  array(
+            'key' => 'SANDBOX64492A10-B70E-457F-A3CE-C72D56D84AB0-20211101225225',
+            'sid' => $sessionId,
+            'format' => 'json');
+        
+        $data = http_build_query($array);
+        $curl = curl_init();
+        
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://sandbox.ipaymu.com/api/transaksi',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS => $data,
+          CURLOPT_HTTPHEADER => array(
+            'Accept: application/json'
+          ),
+        ));
+        
+        $response = curl_exec($curl);
+        
+        curl_close($curl);
+
+        return $response;
+    }
+    
     public function notify(Request $request)
     {
         $trx_id = $request->trx_id;
