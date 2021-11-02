@@ -1,4 +1,4 @@
-@extends('admin/layouts/app',["title"=>"AR Resource"])
+@extends('admin/layouts/app',["title"=>"Package"])
 @section('content')
     <main id="main" class="main">
 

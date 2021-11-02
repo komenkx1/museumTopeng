@@ -40,7 +40,7 @@ class HomeController extends Controller
         $country = Country::getByCode($request->country);
         $request->validate([
             "name" => "required",
-            "email" => "required|unique:guests,email",
+            "email" => "required",
             "country" => "required",
             "province" => "required",
             "city" => "required",
@@ -113,9 +113,7 @@ class HomeController extends Controller
             Transaction::create([
                 "id_guest" => $currentGuest->id,
                 "id_package" => $currentPackage->id,
-                "session_ID" => "-",
-                "url" => "-",
-                "trx_id" =>  "COD".$currentGuest->id.substr(md5(uniqid(rand(time()))), 0, 8),
+                "trx_id" =>  "COD".$currentGuest->id.substr(md5(uniqid(rand(1,6))), 0, 8),
                 "status" => 'pending',
                 "payment_method" => "COD",
             ]);

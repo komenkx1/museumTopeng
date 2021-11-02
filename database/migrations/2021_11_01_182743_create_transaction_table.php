@@ -17,8 +17,8 @@ class CreateTransactionTable extends Migration
             $table->id();
             $table->foreignId("id_guest")->constrained("guests","id");
             $table->foreignId("id_package")->constrained("packages","id");
-            $table->string("session_ID");
-            $table->string("url");
+            $table->string("session_ID")->nullable();
+            $table->string("url")->nullable();
             $table->string("trx_id")->nullable();
             $table->string("paid_at")->nullable();;   
             $table->string("status");   
