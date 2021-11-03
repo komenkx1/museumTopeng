@@ -30,7 +30,7 @@ class NotifikasiNomorPembayaran extends Mailable
     {
         // dd($this->transactionInfos); 
         return $this->markdown('notifikasiNomorPembayaran')
-                    ->subject("Transaksi #".$this->currentTransaction->trx_id)
+                    ->subject("Transaksi #".$this->currentTransaction->session_ID)
                     ->with(["transaction" => $this->currentTransaction]);
     }
 }
