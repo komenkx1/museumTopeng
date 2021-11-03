@@ -131,4 +131,12 @@ public function verification(Transaction $transaction)
         'toast' =>  true, 
   ]);
 }
+
+public function filters(): array
+{
+    return [
+        'start_date' => Filter::make('Tanggal Awal')->date(),
+        'end_date' => Filter::make('Tanggal Akhir')->date(),
+    ];
+}
 }

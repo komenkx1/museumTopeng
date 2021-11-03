@@ -56,6 +56,8 @@
     <!-- CDN Files -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@10"])
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine.js" integrity="sha512-nIwdJlD5/vHj23CbO2iHCXtsqzdTTx3e3uAmpTm4x2Y8xCIFyWu4cSIV8GaGe2UNVq86/1h9EgUZy7tn243qdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/assets/vendor/php-email-form/validate.js"></script>
@@ -68,12 +70,12 @@
 
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
-
-    @yield('scripts')
     @livewireScripts
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <x-livewire-alert::scripts />
     @stack('scripts')
+    @yield('scripts')
+
 
 </body>
 
