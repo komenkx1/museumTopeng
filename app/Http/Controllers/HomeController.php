@@ -72,6 +72,7 @@ class HomeController extends Controller
             $transaction = Transaction::create([
                 "id_guest" => $currentGuest->id,
                 "id_package" => $currentPackage->id,
+                "session_ID" => Transaction::generateCodCode(),
                 "trx_id" =>  strtolower("COD".$currentGuest->id.substr(md5(uniqid(rand(1,6))), 0, 8)),
                 "status" => 'pending',
                 "payment_method" => "COD",

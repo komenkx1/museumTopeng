@@ -48,7 +48,7 @@ background-color: #f2f4f6;
 <table>
     <tbody>
         <tr>
-            <td class="tb-left d-flex justify-content-beetween"><span class="text-bold">Transaction Id</span> <span style="text-align: end" style="word-break">{{ $transaction->session_ID }}</span></td>
+            <td class="tb-left d-flex justify-content-beetween"><span class="text-bold">Ticket Id</span> <span style="text-align: end" style="word-break">{{ $transaction->trx_id }}</span></td>
         </tr>
         <tr>
             <td class="tb-left d-flex justify-content-beetween"><span class="text-bold">Item Name</span> <span style="text-align: end" style="word-break">{{ $transaction->package->name }}</span></td>

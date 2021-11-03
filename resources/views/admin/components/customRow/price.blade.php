@@ -1,0 +1,1 @@
+@currency($row->package->price)

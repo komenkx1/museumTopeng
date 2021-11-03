@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AugmentedRealityController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\PackageController;
+use App\Http\Controllers\admin\TransactionController;
 use App\Http\Controllers\front\AugmentedRealityController as FrontAugmentedRealityController;
 use App\Http\Controllers\front\auth\AugmentedRealityAccountController;
 use App\Http\Controllers\HomeController;
@@ -44,6 +45,7 @@ Route::group([
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('augmented-reality', AugmentedRealityController::class)->except(["destroy", "show"]);
     Route::resource("packages", PackageController::class)->only(["index","create","edit"]);
+    Route::resource("transactions", TransactionController::class)->only(["index","update"]);
 
 });
 

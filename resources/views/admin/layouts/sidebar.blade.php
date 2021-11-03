@@ -24,9 +24,14 @@
               <i class="bi bi-box"></i>
               <span>Packages</span>
           </a>
-      </li><!-- End AR Nav -->
+      </li><!-- End Packages Nav -->
       <li class="nav-heading">Transaction Data</li>
-
+      <li class="nav-item">
+        <a class="nav-link @if (Route::is('admin.transactions.*')) active @else collapsed @endif" href="{{ Route('admin.transactions.index') }}">
+            <i class="bi bi-box"></i>
+            <span>Transaction</span>
+        </a>
+    </li><!-- End Transaction Nav -->
       </ul>
 
   </aside><!-- End Sidebar-->
