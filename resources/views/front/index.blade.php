@@ -392,7 +392,7 @@
                     @foreach ($packages as $package)
 
                         <div class="col-lg-4 col-md-6 my-2 mx-auto">
-                            <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="box shadow" data-aos="zoom-in" data-aos-delay="100">
                                 <h3>{{ $package->name }}</h3>
                                 <div class="detail" style="overflow: hidden; height:200px">
                                     <h4><sup></sup> @currency($package->price)</h4>

@@ -23,7 +23,7 @@
                 <form action="{{ Route("home.transaction.checkout") }}" method="post" role="form" class="p-3 my-3">
                     @csrf
                     <div class="row">
-                        <div class="col-md-8 card shadow rounded-md p-4">
+                        <div class="col-lg-8 col-md-12 card shadow rounded-md p-4">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label class="mb-2" for="name">Name</label>
@@ -85,10 +85,10 @@
                         <div class="d-lg-none my-3">
                             <hr>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-4 col-md-12">
                             <!-- ======= Package Section ======= -->
-                            <section id="pricing" class="pricing p-0">
-                                <div class="container mt-3">
+                            <section id="pricing" class="pricing p-0 ">
+                                <div class="container mt-3 px-lg-4 p-0 ">
 
                                     <div class="section-title p-0" data-aos="fade-up">
                                         <h2>Package</h2>
@@ -96,7 +96,7 @@
                                     </div>
 
                                     <div class="row" data-aos="fade-left">
-                                        <div class="col-lg-12 col-md-6 my-2 mx-auto">
+                                        <div class="col-12 my-2 mx-auto">
                                             <div class="box" data-aos="zoom-in" data-aos-delay="100">
                                                 <h3>{{ $package->name }}</h3>
                                                 <div class="detail" style="overflow: hidden; height:160px">
@@ -137,7 +137,7 @@
                                     </div>
 
                                     <div class="row" data-aos="fade-left">
-                                        <div class="col-lg-12 col-md-6 my-2 mx-auto">
+                                        <div class="col-12 my-2 mx-auto">
                                             <div class="card p-3">
                                                 <div class="form-check">
                                                     <input class="form-check-input" required type="radio" name="paymentMehod"
