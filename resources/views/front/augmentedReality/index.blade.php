@@ -43,7 +43,7 @@
             @foreach ($augmentedReality as $itemAr)
                 @if (pathinfo($itemAr->content_file, PATHINFO_EXTENSION) == 'mp4')
                     <a-assets>
-                        <video preload="auto" id="vid{{ $loop->index }}" response-type="arraybuffer" loop="false"
+                        <video preload="auto" id="vid{{ $loop->index }}" loop response-type="arraybuffer" loop="false"
                             crossorigin webkit-playsinline playsinline controls>
                             <source src="{{ $itemAr->content_file }}">
                         </video>
