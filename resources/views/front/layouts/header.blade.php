@@ -3,7 +3,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
         <div class="logo d-flex align-items-center">
-            <img src="assets/img/icon.png" alt="" class="me-2">
+            <img src="/assets/img/icon.png" alt="logo" class="me-2">
             <h6><a href="/"><span> SETIA DARMA HOUSE OF MASKS AND PUPPETS</span></a></h6>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
