@@ -38,11 +38,17 @@
                             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample" style="">
                                 <div class="accordion-body">
+                                    @if (pathinfo($selectedAR->content_file??'', PATHINFO_EXTENSION) == 'mp4')
+                                    <video controls id="video1" style="width: 100%; height: auto; margin:0 auto; frameborder:0;">
+                                        <source src="{{ $selectedAR->content_file ?? '' }}" type="video/mp4">
+                                        Your browser doesn't support HTML5 video tag.
+                                      </video>
+                                    @else
                                     <div class="imgPreview card  mx-auto" id="contentImg"
-                                        style="background-image: url({{ $selectedAR->content_file ?? '' }})">
-                                        <img src="" alt="">
-                                    </div>
-
+                                    style="background-image: url({{ $selectedAR->content_file ?? '' }})">
+                                    <img src="" alt="">
+                                </div>
+                                    @endif
 
                                 </div>
                             </div>
@@ -66,5 +72,9 @@
         document.addEventListener('OpenModalDetail', event => {
             $('#detailArModal').modal('show');
         });
+
+        $('#detailArModal').on('hidden.bs.modal', function () {
+        $('#video1')[0].pause();
+        })
     </script>
 @endpush
