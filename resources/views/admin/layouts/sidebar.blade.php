@@ -25,6 +25,13 @@
               <span>Packages</span>
           </a>
       </li><!-- End Packages Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link @if (Route::is('admin.events.*')) active @else collapsed @endif" href="{{ Route('admin.events.index') }}">
+          <i class="bi bi-calendar-event"></i>
+            <span>Event</span>
+        </a>
+    </li><!-- End Packages Nav -->
       <li class="nav-heading">Transaction Data</li>
       <li class="nav-item">
         <a class="nav-link @if (Route::is('admin.transactions.*')) active @else collapsed @endif" href="{{ Route('admin.transactions.index') }}">
