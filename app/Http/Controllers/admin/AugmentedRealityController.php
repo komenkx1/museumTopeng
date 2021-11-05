@@ -7,6 +7,8 @@ use App\Models\AugmentedReality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 class AugmentedRealityController extends Controller
 {
@@ -41,12 +43,12 @@ class AugmentedRealityController extends Controller
         $request->validate([
             "name" => ["required"],
             "marker_file_url" => ["required", "mimetypes:text/plain"],
-            "content_file_url" => ["required", "mimes:png,jpg,jpeg"],
+            "content_file_url" => ["required", "mimes:png,jpg,jpeg,mp4"],
         ]);
         $ar = new AugmentedReality();
         DB::beginTransaction();
         $ar->name = $request->name;
-        $ar->marker_id = "AUgmentedReality" . md5(now()) . "-" . $request->name;
+        $ar->marker_id = "AUgmentedReality" . md5(now()) . "-" . Str::slug($request->name) ;
 
         $fileMarker = $request->file('marker_file_url');
         $fileContent = $request->file('content_file_url');
@@ -64,7 +66,7 @@ class AugmentedRealityController extends Controller
 
         $ar->save();
         DB::commit();
-        return redirect()->route("admin.augmented-reality.index")->with('toast_success', 'Data berhasil dibuat!');
+        return redirect()->route("admin.augmented-reality.index")->with('toast_success', 'Resource Successful Created');
     }
 
     /**
@@ -103,7 +105,7 @@ class AugmentedRealityController extends Controller
         $request->validate([
             "name" => ["required"],
             "marker_file_url" => ["mimetypes:text/plain"],
-            "content_file_url" => ["mimes:png,jpg,jpeg"],
+            "content_file_url" => ["mimes:png,jpg,jpeg,mp4"],
         ]);
 
         DB::beginTransaction();
@@ -126,7 +128,7 @@ class AugmentedRealityController extends Controller
 
         $augmentedReality->update();
         DB::commit();
-        return redirect()->route("admin.augmented-reality.index")->with('toast_info', 'Data berhasil dibuat!');
+        return redirect()->route("admin.augmented-reality.index")->with('toast_info', 'Resource Successful Updated');
     }
 
     /**
