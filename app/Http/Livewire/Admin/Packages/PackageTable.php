@@ -26,7 +26,8 @@ class PackageTable extends DataTableComponent
             Column::make('price'),
             Column::make('Action')
             ->format(function ($value, $column, $row) {
-                return View('admin.components.actions.table-package', compact('row'));
+                $url = Route('admin.packages.edit',['package'=>$row->id]);
+                return View('admin.components.actions.table-default-action', compact('row','url'));
             }),
         ];
         

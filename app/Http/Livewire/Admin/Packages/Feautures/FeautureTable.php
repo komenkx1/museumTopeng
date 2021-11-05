@@ -72,6 +72,7 @@ class FeautureTable extends DataTableComponent
             'toast' => true,
             'timer' =>  3000,
         ]);
+        
     }
 
     public function triggerConfirm($id)
