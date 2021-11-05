@@ -40,7 +40,10 @@ class EventController extends Controller
     {
         $request->validate([
             "name" => ["required"],
-            "image_url" => ["required", "mimes:png,jpg,jpeg","max:2048"],
+            "image_url" => ["required", "mimes:png,jpg,jpeg","max:2048","dimensions:ratio=2/3"],
+        ],
+         [
+            "image_url.dimensions" => "Image has invalid dimensions."
         ]);
         $events = $request->all();
         $fileContent = $request->file('image_url');
@@ -88,8 +91,11 @@ class EventController extends Controller
     {
         $request->validate([
             "name" => ["required"],
-            "image_url" => ["mimes:png,jpg,jpeg","max:2048"],
-        ]);
+            "image_url" => ["mimes:png,jpg,jpeg","max:2048","dimensions:ratio=2/3"],
+        ],
+        [
+            "image_url.dimensions" => "Image has invalid dimensions."
+            ]);
         $events = $request->all();
         $fileContent = $request->file('image_url');
 

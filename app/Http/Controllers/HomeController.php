@@ -6,6 +6,7 @@ use App\Mail\NotifikasiNomorPembayaran;
 use App\Mail\NotifikasiPembayaranSukses;
 use App\Mail\NotifikasiPembayaranSuksesAR;
 use App\Models\AugmentedRealityAccount;
+use App\Models\Event;
 use App\Models\Feauture;
 use App\Models\Guest;
 use App\Models\Package;
@@ -24,7 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $packages = Package::all();
-        return view("front.index", compact("packages"));
+        $events = Event::all();
+        return view("front.index", compact("packages","events"));
     }
 
     public function transaction(Package $package)

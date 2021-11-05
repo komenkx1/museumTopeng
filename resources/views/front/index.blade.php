@@ -109,34 +109,15 @@
                     <h2>Event</h2>
                     <p>Check The Event</p>
                 </div>
-
+         
                 <div class="row" data-aos="fade-left">
-                    <a rel="chimps" href="/assets/img/a life in shadow 2019.jpg" class="fancybox col-lg-3 col-6 my-2 my-2">
+                    @foreach ($events as $event)
+                    <a rel="chimps" href="{{ $event->thumbnail }}" class="fancybox col-lg-3 col-6 my-2 my-2">
                         <div class="card shadow-sm rounded col-12">
-                            <img src="/assets/img/a life in shadow 2019.jpg" class="imgEvent" alt="">
+                            <img src="{{ $event->thumbnail }}" class="imgEvent" alt="{{ $event->name }}">
                         </div>
-
                     </a>
-                    <a rel="chimps" href="/assets/img/Flyer2018.jpg" class="fancybox col-lg-3 col-6 my-2 my-2">
-                        <div class="card shadow-sm rounded col-12">
-                            <img src="/assets/img/Flyer2018.jpg" class="imgEvent" alt="">
-                        </div>
-
-                    </a>
-                    <a rel="chimps" href="/assets/img/Sustainability_Through_Differences 2018.jpg"
-                        class="fancybox col-lg-3 col-6 my-2 my-2">
-                        <div class="card shadow-sm rounded col-12">
-                            <img src="/assets/img/Sustainability_Through_Differences 2018.jpg" class="imgEvent"
-                                alt="">
-                        </div>
-
-                    </a>
-                    <a rel="chimps" href="/assets/img/TEDx Ubud 2019.jpg" class="fancybox col-lg-3 col-6 my-2 my-2">
-                        <div class="card shadow-sm rounded col-12">
-                            <img src="/assets/img/TEDx Ubud 2019.jpg" class="imgEvent" alt="">
-                        </div>
-
-                    </a>
+                    @endforeach                   
                 </div>
 
 
