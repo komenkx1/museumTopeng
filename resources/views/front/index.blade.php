@@ -110,9 +110,9 @@
                     <p>Check The Event</p>
                 </div>
          
-                <div class="row" data-aos="fade-left">
+                <div class="row owl-carousel my-0" data-aos="fade-left">
                     @foreach ($events as $event)
-                    <a rel="chimps" href="{{ $event->thumbnail }}" class="fancybox col-lg-3 col-6 my-2 my-2">
+                    <a rel="chimps" href="{{ $event->thumbnail }}" class="fancybox item col-lg-3 col-6">
                         <div class="card shadow-sm rounded col-12">
                             <img src="{{ $event->thumbnail }}" class="imgEvent" alt="{{ $event->name }}">
                         </div>
@@ -490,20 +490,19 @@
                             </div>
                         </li>
 
-                        <li data-aos="fade-up" data-aos-delay="400">
+                        <li data-aos="fade-up" data-aos-delay="300">
                             <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
-                                data-bs-target="#faq-list-5" class="collapsed">Tortor vitae purus faucibus ornare.
-                                Varius vel pharetra vel turpis nunc eget lorem dolor? <i
-                                    class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                            <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+                                data-bs-target="#faq-list-4" class="collapsed">Tempus quam pellentesque nec nam
+                                aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i
+                                    class="bx bx-chevron-up icon-close"></i></a>
+                            <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
                                 <p>
-                                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo
-                                    integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc
-                                    eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+                                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est
+                                    ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit
+                                    adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
                                 </p>
                             </div>
                         </li>
-
                     </ul>
                 </div>
 

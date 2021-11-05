@@ -45,6 +45,10 @@ h1, h2, h3, h4, h5, h6 {
 .select2-selection__arrow {
   margin: 10px;
 }
+.owl-carousel .owl-stage-outer .owl-stage {
+  display: flex;
+  align-items: center;
+}
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -315,9 +319,9 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 55px;
   right: 15px;
-  bottom: 15px;
+  /* bottom: 15px; */
   left: 15px;
-  padding: 10px 0;
+  padding: 20px 0;
   border-radius: 8px;
   background-color: #fff;
   overflow-y: auto;
@@ -420,10 +424,14 @@ h1, h2, h3, h4, h5, h6 {
   #hero {
     background-attachment: fixed;
   }
+ 
 }
 @media (max-width: 991px) {
   #hero {
     padding-top: 80px;
+  }
+  .navbar-mobile ul {
+    bottom: 15px;
   }
   #hero .animated {
     -webkit-animation: none;
@@ -449,6 +457,9 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 575px) {
   #hero .hero-img img {
     width: 80%;
+  }
+  .navbar-mobile ul {
+    bottom: unset!important;
   }
 }
 
@@ -1152,7 +1163,7 @@ section {
   transition: 0.3s;
 }
 .pricing .btn-buy:hover {
-  background: #e1b30c;
+  background: #ffc107;
 }
 .pricing .featured h3 {
   color: #fff;
@@ -1378,7 +1389,7 @@ section {
 }
 #footer .footer-top .footer-info {
   margin-bottom: 15px;
-  background: #010246;
+  background: #ef8f00;
   color: #fff;
   border-top: 4px solid #1acc8d;
   text-align: center;
@@ -1398,7 +1409,7 @@ section {
   font-family: "Montserrat", sans-serif;
 }
 #footer .footer-top .social-links a {
-  font-size: 18px;
+  font-size: 20px;
   display: inline-block;
   color: #fff;
   line-height: 1;
@@ -1483,7 +1494,7 @@ section {
   background: #149f6e;
 }
 #footer .copyright {
-  border-top: 1px solid #010479;
+  border-top: 1px solid #ef8f00;
   text-align: center;
   padding-top: 30px;
 }
