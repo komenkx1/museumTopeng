@@ -81,10 +81,9 @@
                                     <label for="inputNumber" class="col-12 col-form-label">Upload Content <span
                                             class="text-danger">*</span></label>
                                     <div class="col-12">
-                                        <input accept=".png,.jpg,.jpeg" name="content_file_url"
+                                        <input accept=".png,.jpg,.jpeg,.mp4" name="content_file_url"
                                             class="@error('content_file_url') is-invalid @enderror form-control" type="file"
-                                            id="formFileContent"
-                                            onchange="document.getElementById('contentImg').style.backgroundImage = 'url('+window.URL.createObjectURL(this.files[0])+')'">
+                                            id="formFileContent">
                                         @error('content_file_url')
                                             <span class="invalid-feedback"><small>{{ $message }}</small></span>
                                         @enderror
@@ -106,9 +105,13 @@
 
                 <div class="col-lg-3 col-12">
                     <p class="text-center fw-bold">Preview Content</p>
-                    <div class="imgPreview card  mx-auto" id="contentImg"
-                        style="background-image: url({{ $augmentedReality->content_file }})">
-                        <img src="" alt="">
+                    
+                    <video controls id="video1" class=" @if (pathinfo($augmentedReality->content_file, PATHINFO_EXTENSION) != 'mp4') d-none @endif" style="width: 100%; height: auto; margin:0 auto; frameborder:0;">
+                        <source src="{{ $augmentedReality->content_file }}" type="video/mp4">
+                            Your browser doesn't support HTML5 video tag.
+                    </video>
+                    <div class="imgPreview card  mx-auto @if (pathinfo($augmentedReality->content_file, PATHINFO_EXTENSION) == 'mp4') d-none @endif" id="contentImg"  style="background-image: url({{ $augmentedReality->content_file }})">
+                  
                     </div>
 
 
@@ -130,4 +133,32 @@
             
         }
     </script>
+
+    <script>
+        document.getElementById("formFileContent")
+    .onchange = function(event) {
+        var $source = $('#video1');
+     const name = event.target.files[0].name;
+     const lastDot = name.lastIndexOf('.');
+     const fileName = name.substring(0, lastDot);
+     const ext = name.substring(lastDot + 1);
+    
+     if (ext == "mp4") {
+        $("#video1").removeClass( "d-none" );
+        $("#contentImg").addClass("d-none");
+        document.getElementById('contentImg').style.backgroundImage = 'unset';
+        $source[0].src = URL.createObjectURL(this.files[0]);
+        $source.parent()[0].load();
+     }else{
+         $("#video1").addClass("d-none");
+        $("#contentImg").removeClass("d-none");
+    
+        document.getElementById('contentImg').style.backgroundImage = 'url('+window.URL.createObjectURL(this.files[0])+')'
+     }
+    
+    console.log(ext);
+      
+    }
+    </script>
+
 @endsection
