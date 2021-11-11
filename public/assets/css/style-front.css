@@ -49,6 +49,51 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
 }
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+.animate-float {
+  transform: translatey(0px);
+  -webkit-animation: float 5s ease-in-out infinite;
+          animation: float 5s ease-in-out infinite;
+}
+.event-card {
+  transition: transform 250ms;
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
+}
+
+.mapDiv{
+  /* width: 25%; */
+  margin: auto;
+}
+
+.mapDiv path{
+  fill: #1acc8d;
+  stroke: #bbbbbb;
+  stroke-width: 1px;
+  transition: fill 0.3s;
+}
+
+.mapDiv a:hover path{
+  fill: #ffc107
+}
+
+.mapDiv  text:hover{
+  fill: #ffc107;
+}
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -130,6 +175,12 @@ h1, h2, h3, h4, h5, h6 {
 @media screen and (max-width: 768px) {
   [data-aos-delay] {
     transition-delay: 0 !important;
+  }
+  .mapDiv{
+    overflow: scroll;
+  }
+  .mapDiv svg {
+    width: 1000px;
   }
 }
 /*--------------------------------------------------------------
