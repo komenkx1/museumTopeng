@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call(
-            AugmentedRealityAuthSeeder::class
+           [ 
+               AugmentedRealityAuthSeeder::class,
+               RoleSeeder::class,
+               UserSeeder::class,
+           ]
         );
     }
 }

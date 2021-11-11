@@ -12,49 +12,69 @@
         <nav id="navbar" class="navbar">
 
             @if (Route::is('home'))
-            <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto" href="#event">Event</a></li>
-                <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-                <li><a class="nav-link" href="#">Gallery</a></li>
-                <li><a class="nav-link scrollto" href="#faq">FAQ</a></li> 
-                <li class="dropdown"><a href="#"><span>Augmented Reality</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        @if (Auth::guard('augmentedRealities')->user())
-                        <li><a class="nav-link" href="{{ Route('ArReader') }}">Start Augmented
-                                Reality</a></li>
-                        <li>
-                            <a class="nav-link" href="#" onclick="event.preventDefault();
-                           document.getElementById('formLogout').submit();">Logout</a>
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#about">About</a></li>
+                    <li><a class="nav-link scrollto" href="#event">Event</a></li>
+                    {{-- <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li> --}}
+                    <li><a class="nav-link" href="#">Gallery</a></li>
+                    <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
+                    @auth
+                        <li class="dropdown"><a
+                                href="#"><span>{{ \Illuminate\Support\Str::limit(Auth::user()->name, 10, '...') }}</span>
+                                <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a class="nav-link" href="{{ Route('admin.index') }}">Dashboard</a></li>
+                                <li>
+                                    <a class="nav-link" href="#" onclick="event.preventDefault();
+                        document.getElementById('formLogoutMuseum').submit();">Logout</a>
+                                </li>
+                            </ul>
                         </li>
-                        @else
-                        <li><a data-bs-toggle="modal" href=" #modalForm" role="button">Login</a></li>
-                        @endif
-                    </ul>
-                </li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            </ul>
-            @else
-            <ul>
-                <li><a class="nav-link scrollto" href="/">Home</a></li>
-                <li><a class="nav-link" href="#">Gallery</a></li>
-                <li class="dropdown"><a href="#" class="@if(Route::is('ArReader'))nav-link active @endif"><span>Augmented Reality</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
+                    @else
+                        <li><a class="nav-link scrollto" href="{{ Route('login') }}">Login</a></li>
 
-                        @if (Auth::guard('augmentedRealities')->user())
-                        <li @if(Route::is('ArReader')) class="d-none" @endif><a class="nav-link" href="{{ Route('ArReader') }}">Start Augmented
-                                Reality</a></li>
-                        <li>
-                            <a class="nav-link" href="#" onclick="event.preventDefault();
+                    @endauth
+
+                    <li class="dropdown"><a href="#"><span>Augmented Reality</span> <i
+                                class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            @if (Auth::guard('augmentedRealities')->user())
+                                <li><a class="nav-link" href="{{ Route('ArReader') }}">Start Augmented
+                                        Reality</a></li>
+                                <li>
+                                    <a class="nav-link" href="#" onclick="event.preventDefault();
+                           document.getElementById('formLogout').submit();">Logout</a>
+                                </li>
+                            @else
+                                <li><a data-bs-toggle="modal" href=" #modalForm" role="button">Login</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                </ul>
+            @else
+                <ul>
+                    <li><a class="nav-link scrollto" href="/">Home</a></li>
+                    <li><a class="nav-link" href="#">Gallery</a></li>
+                    <li class="dropdown"><a href="#" class="@if (Route::is('ArReader'))nav-link active @endif"><span>Augmented
+                                Reality</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+
+                            @if (Auth::guard('augmentedRealities')->user())
+                                <li @if (Route::is('ArReader')) class="d-none" @endif><a class="nav-link"
+                                        href="{{ Route('ArReader') }}">Start Augmented
+                                        Reality</a></li>
+                                <li>
+                                    <a class="nav-link" href="#" onclick="event.preventDefault();
                         document.getElementById('formLogout').submit();">Logout</a>
-                        </li>
-                        @else
-                        <li><a data-bs-toggle="modal" href=" #modalForm" role="button">Login</a></li>
-                        @endif
-                    </ul>
-                </li>
-            </ul>
+                                </li>
+                            @else
+                                <li><a data-bs-toggle="modal" href=" #modalForm" role="button">Login</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                </ul>
             @endif
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -63,5 +83,9 @@
 </header><!-- End Header -->
 
 <form action="{{ Route('ArReader.logout') }}" method="post" id="formLogout">
+    @csrf
+</form>
+
+<form action="{{ Route('logout') }}" method="post" id="formLogoutMuseum">
     @csrf
 </form>

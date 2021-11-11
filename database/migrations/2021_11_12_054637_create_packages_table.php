@@ -15,6 +15,7 @@ class CreatePackagesTable extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("id_museum")->constrained("museums","id");
             $table->string("name");
             $table->integer("price");
             $table->timestamps();

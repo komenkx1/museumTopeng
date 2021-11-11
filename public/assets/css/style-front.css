@@ -198,7 +198,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #header.header-scrolled {
      background: rgb(2 2 2 / 90%);
-  height: 60px;
+  height: 90px;
 }
 #header .logo h6 {
   /* font-size: 28px; */

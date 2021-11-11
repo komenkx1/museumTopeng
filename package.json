@@ -10,13 +10,23 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@popperjs/core": "^2.6.0",
+        "@webpixels/css": "^1.1.5",
         "axios": "^0.21",
+        "bootstrap": "^5.1.1",
+        "browser-sync": "^2.27.7",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "popper.js": "^1.16.1",
+        "postcss": "^8.1.14",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.32.11",
+        "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "ar.js-modular": "^1.0.1",
+        "ar.js-modular": "^1.0.0",
         "three": "^0.134.0"
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Mail\NotifikasiPembayaranSukses;
 use App\Mail\NotifikasiPembayaranSuksesAR;
 use App\Models\AugmentedRealityAccount;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,7 +43,8 @@ Route::get('/transaction/checkout/ureturn', [HomeController::class, 'ureturn'])-
 
 Route::group([
     'prefix' => 'admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware'  => 'checkstatus',
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('augmented-reality', AugmentedRealityController::class)->except(["destroy", "show"]);
@@ -64,3 +66,6 @@ Route::post('/ar-reader/login/proses', [AugmentedRealityAccountController::class
 
 
 // });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
